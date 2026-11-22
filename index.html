@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/css/src_app_globals_162hn9oqc8uss.486910e3f9.css" data-precedence="next_static/chunks/src_app_globals_162hn9oqc8uss.486910e3f9.css"/><title>Neunetix</title><meta name="application-name" content="Neunetix"/><meta name="robots" content="noindex, nofollow"/><link rel="icon" href="assets/brand/neunetix-mark.3dfa40aa5a.png"/><link rel="apple-touch-icon" href="assets/brand/neunetix-mark.3dfa40aa5a.png"/><script>
+(function(){
+  var root=document.documentElement;
+  try{var t=localStorage.getItem('eob-preview-theme');if(t==='light'||t==='dark')root.setAttribute('data-theme',t);}catch(e){}
+  function toast(msg){var d=document.createElement('div');d.className='toast';d.setAttribute('role','status');d.textContent=msg;document.body.appendChild(d);setTimeout(function(){d.className='toast leaving'},2600);setTimeout(function(){d.remove()},3000);}
+  function syncAppearance(){var cur=root.getAttribute('data-theme')||'light';document.querySelectorAll('.appearance button').forEach(function(b){var v=b.textContent.trim().toLowerCase();b.className=v===cur?'on':'';b.setAttribute('aria-checked',v===cur?'true':'false');});}
+  window.previewSync=syncAppearance;
+  document.addEventListener('DOMContentLoaded',syncAppearance);
+  document.addEventListener('submit',function(e){var f=e.target;e.preventDefault();if(f.hasAttribute('data-nx-signin'))return;if(f.hasAttribute('data-preview-signout')){try{sessionStorage.removeItem('nx-key');}catch(x){}}var go=f.getAttribute('data-preview-go');if(go){location.href=go;return;}toast('This is a preview with sample data. Nothing is saved.');},true);
+  document.addEventListener('click',function(e){
+    var off=e.target.closest&&e.target.closest('[data-preview-off]');
+    if(off){e.preventDefault();toast('This part isn\u2019t included in the preview.');return;}
+    var ap=e.target.closest&&e.target.closest('.appearance button');
+    if(ap){var v=ap.textContent.trim().toLowerCase();root.setAttribute('data-theme',v);try{localStorage.setItem('eob-preview-theme',v);}catch(x){}syncAppearance();return;}
+    var b=e.target.closest&&e.target.closest('button');
+    if(b&&b.type==='button'&&!b.hasAttribute('popovertarget')&&!b.closest('[popover]')){toast('This is a preview with sample data. Nothing is saved.');}
+  },true);
+})();
+</script><script>(function(){
+var SALT="oqk4EOPMicpd6+oR2MxWiA==",CHECK="V06FSYFgRqIgkgIoZrBFSpe7hvXgMLsiPNgcFm7AWVhwA42JtG2F",N=600000;
+function b64(s){var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u;}
+function t64(u){var s='';for(var i=0;i<u.length;i++)s+=String.fromCharCode(u[i]);return btoa(s);}
+document.addEventListener('DOMContentLoaded',function(){
+  var f=document.querySelector('form[data-nx-signin]');if(!f)return;
+  f.addEventListener('submit',async function(e){
+    e.preventDefault();
+    var btn=f.querySelector('button[type=submit]'),err=f.querySelector('.form-error');
+    if(!err){err=document.createElement('p');err.className='form-error';err.setAttribute('role','alert');btn.parentNode.insertBefore(err,btn);}
+    err.textContent='';var label=btn.textContent;btn.disabled=true;btn.textContent='Signing In\u2026';
+    try{
+      var base=await crypto.subtle.importKey('raw',new TextEncoder().encode(f.email.value.trim().toLowerCase()+'\u0000'+f.password.value),'PBKDF2',false,['deriveBits']);
+      var bits=new Uint8Array(await crypto.subtle.deriveBits({name:'PBKDF2',salt:b64(SALT),iterations:N,hash:'SHA-256'},base,256));
+      var k=await crypto.subtle.importKey('raw',bits,'AES-GCM',false,['decrypt']),c=b64(CHECK);
+      await crypto.subtle.decrypt({name:'AES-GCM',iv:c.slice(0,12)},k,c.slice(12));
+      sessionStorage.setItem('nx-key',t64(bits));
+      location.href='overview/';
+    }catch(x){
+      err.textContent='Incorrect email or password.';btn.disabled=false;btn.textContent=label;f.password.value='';f.password.focus();
+    }
+  });
+});
+})();</script></head><body><div hidden=""><!--$--><!--/$--></div><div class="auth-wrap"><div class="auth-card"><img class="brand-logo on-light" src="assets/brand/neunetix-logo-on-light.5e1e98ebb7.png" alt="Neunetix" width="220" height="50"/><img class="brand-logo on-dark" src="assets/brand/neunetix-logo-on-dark.c1ea5f6400.png" alt="Neunetix" width="220" height="50"/><h1 class="lead">Sign in to Neunetix</h1><form data-nx-signin="1" encType="multipart/form-data" data-preview-form="1"><input type="hidden" name="$ACTION_REF_1"/><input type="hidden" name="$ACTION_1:0" value="{&quot;id&quot;:&quot;60d0ea554066b55b70b13f70d7d1bc068918040a88&quot;,&quot;bound&quot;:&quot;$@1&quot;}"/><input type="hidden" name="$ACTION_1:1" value="[null]"/><input type="hidden" name="$ACTION_KEY" value="k87252e973d32d242a872a6401c2d4ed7"/><div class="inset-fields"><input id="email" type="email" autoComplete="username" placeholder="Email" aria-label="Email" required="" autofocus="" name="email"/><input id="password" type="password" autoComplete="current-password" placeholder="Password" aria-label="Password" required="" name="password"/></div><button type="submit" class="btn large">Continue</button></form><p class="auth-foot">Forgot your password? Ask your admin to reset it.</p></div></div><!--$--><!--/$--></body></html>
