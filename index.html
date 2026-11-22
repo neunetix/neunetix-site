@@ -6,18 +6,18 @@
   function syncAppearance(){var cur=root.getAttribute('data-theme')||'light';document.querySelectorAll('.appearance button').forEach(function(b){var v=b.textContent.trim().toLowerCase();b.className=v===cur?'on':'';b.setAttribute('aria-checked',v===cur?'true':'false');});}
   window.previewSync=syncAppearance;
   document.addEventListener('DOMContentLoaded',syncAppearance);
-  document.addEventListener('submit',function(e){var f=e.target;e.preventDefault();if(f.hasAttribute('data-nx-signin'))return;if(f.hasAttribute('data-preview-signout')){try{sessionStorage.removeItem('nx-key');}catch(x){}}var go=f.getAttribute('data-preview-go');if(go){location.href=go;return;}toast('This is a preview with sample data. Nothing is saved.');},true);
+  document.addEventListener('submit',function(e){var f=e.target;e.preventDefault();if(f.hasAttribute('data-nx-signin')||f.hasAttribute('data-preview-search'))return;if(f.hasAttribute('data-preview-signout')){try{sessionStorage.removeItem('nx-key');}catch(x){}}var go=f.getAttribute('data-preview-go');if(go){location.href=go;return;}toast('This is a preview with sample data. Nothing is saved.');},true);
   document.addEventListener('click',function(e){
     var off=e.target.closest&&e.target.closest('[data-preview-off]');
     if(off){e.preventDefault();toast('This part isn\u2019t included in the preview.');return;}
     var ap=e.target.closest&&e.target.closest('.appearance button');
     if(ap){var v=ap.textContent.trim().toLowerCase();root.setAttribute('data-theme',v);try{localStorage.setItem('eob-preview-theme',v);}catch(x){}syncAppearance();return;}
     var b=e.target.closest&&e.target.closest('button');
-    if(b&&b.type==='button'&&!b.hasAttribute('popovertarget')&&!b.closest('[popover]')){toast('This is a preview with sample data. Nothing is saved.');}
+    if(b&&b.type==='button'&&!b.hasAttribute('popovertarget')&&!b.closest('[popover]')&&!b.closest('[data-preview-search]')){toast('This is a preview with sample data. Nothing is saved.');}
   },true);
 })();
 </script><script>(function(){
-var SALT="UTz7jOn8utP0RHTVyLB4LQ==",CHECK="yJF+i08iB6zCtKbLRYo3rThb5ERHoNZcsmyMO4yRTfPta5CYLnIS",N=600000;
+var SALT="+hCISiL5oBSAvB5Nr1bk/Q==",CHECK="ODG4QxFkjTqStiEJTR0jl7B5sZNl0KP4K7fq5bBBXZ/0vMyYg5KA",N=600000;
 function b64(s){var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u;}
 function t64(u){var s='';for(var i=0;i<u.length;i++)s+=String.fromCharCode(u[i]);return btoa(s);}
 document.addEventListener('DOMContentLoaded',function(){
